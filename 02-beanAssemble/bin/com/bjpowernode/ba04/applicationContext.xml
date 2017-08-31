@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册service ,
+    scope="prototype" 原型模式，在初始化spring容器的时候不创建对象，而是在调用时才创建
+    scope="prototype" 单例模式，在初始化spring容器的时候创建对象，不声明scope，则是默认单例模式
+    -->
+    
+     <bean id="myServiceSingleton" class="com.bjpowernode.ba04.SomeServiceImpl" scope="singleton"/>
+
+ 	<bean id="myServicePrototype" class="com.bjpowernode.ba04.SomeServiceImpl" scope="prototype"/>
+
+</beans>
