@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册student -->
+     <bean id="myStudent" class="com.bjpowernode.di06.Student">
+     	<property name="name" value="#{person.name}"></property>
+     	<property name="age" value="#{ person.computeAge()}"></property>
+     	<property name="school" ref="myShool"></property> 
+     	</bean>
+    <!-- 注册school -->
+     <bean id="myShool" class="com.bjpowernode.di06.School">
+     <property name="name" value="上海大学"></property>
+     </bean>
+      <!-- 注册person -->
+     <bean id="person" class="com.bjpowernode.di06.Person">
+     <property name="name" value="#{'张三'}"></property>
+     <property name="age" value="#{ T(java.lang.Math).random()*100}"></property>
+     </bean>
+
+</beans>

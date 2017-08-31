@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册student -->
+     <bean id="myStudent1" class="com.bjpowernode.di04.Student">
+    	<constructor-arg name="name" value="张三"/>
+     	<constructor-arg name="age" value="21"/>
+     	<constructor-arg name="school" ref="myShool"/> 
+     </bean>
+     <bean id="myStudent2" class="com.bjpowernode.di04.Student">
+    	<constructor-arg name="name" value="李四"/>
+     	<constructor-arg name="age" value="21"/>
+     	<constructor-arg name="school" ref="myShool"/> 
+     </bean>
+     <bean id="myCollections" class="com.bjpowernode.di04.MyCollections">
+     	<property name="strs">
+     		<array>
+     			<value>abc</value>
+     			<value>def</value>
+     		</array>
+     	</property>
+     	<property name="students">
+     		<list>
+     			<ref bean="myStudent1"/>
+     			<ref bean="myStudent2"/>
+     		</list>
+     	</property>
+     	<property name="mySet">
+     		<set>
+     			<value>大学</value>
+     			<value>硕士</value>
+     		</set>
+     	</property>
+     	<property name="myMap">
+     		<map>
+     			<entry key="height" value="178"></entry>
+     			<entry key="weight" value="60"></entry>
+     		</map>
+     	</property>
+     	<property name="myPro">
+     		<props>
+     			<prop key="Tel">021</prop>
+     			<prop key="addr">上海</prop>
+     		</props>
+     	</property>
+     </bean>
+    <!-- 注册school -->
+     <bean id="myShool" class="com.bjpowernode.di04.School">
+     <property name="name" value="上海大学"></property>
+     </bean>
+
+</beans>

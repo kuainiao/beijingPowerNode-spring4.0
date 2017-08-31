@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册student -->
+    <bean id="myBase"  abstract="true">
+     	<property name="school" ref="myShool"></property> 
+     	<property name="department" value="计算机"></property> 
+     </bean>
+    
+     
+     
+      
+    <!-- 注册school -->
+     <bean id="myShool" class="com.bjpowernode.di10_1.School">
+     <property name="name" value="上海大学"></property>
+     </bean>
+
+</beans>
