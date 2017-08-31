@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册目标对象 -->
+     <bean id="someService" class="com.bjpowernode.aop10.SomeServiceImpl"/>
+    <!-- 注册切面对象 通知-->
+     <bean id="myAdvice" class="com.bjpowernode.aop10.MyAfterReturningAdvice"/>
+    <!-- 注册切面对象 顾问-->
+     <bean id="myAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+     	<property name="advice" ref="myAdvice"/>
+     	 <!-- 注册切入点：全限定性方法名 com.bjpowernode.aop10.ISomeService.doFirst() --> 
+     	<!-- <property name="pattern" value=".*doFirst"/> -->
+     	<!-- <property name="pattern" value=".*doFirst|.*doSecond"/> -->
+     	<property name="patterns" value=".*doFirst,.*doSecond"/>
+     </bean> 
+     
+     <!-- 生成代理对象-->
+     <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+    	<!--  指定目标对象 -->
+     	<property name="target" ref="someService"/>
+     	<!-- 指定对象 -->
+     	<property name="interceptorNames" value="myAdvisor"/>
+     </bean>
+
+</beans>

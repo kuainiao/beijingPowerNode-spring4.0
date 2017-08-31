@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册目标对象 -->
+     <bean id="someService" class="com.bjpowernode.aop12.SomeServiceImpl"/>
+     <bean id="someService2" class="com.bjpowernode.aop12.SomeServiceImpl"/>
+    <!-- 注册切面对象 通知-->
+     <bean id="myAdvice" class="com.bjpowernode.aop12.MyAfterReturningAdvice"/>
+    <!-- 注册切面对象 顾问-->
+     <bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+     	<property name="advice" ref="myAdvice"/>
+     	 <!-- 注册切入点:简单方法名--> 
+     	<property name="mappedName" value="doFirst"/>
+     </bean> 
+     
+     <!-- 生成代理对象-->
+     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+     	<property name="beanNames" value="someService"/>
+     	<property name="interceptorNames" value="myAdvisor"/>
+     </bean>
+     
+     
+     <!--  
+     ProxyFactoryBean缺点：
+     1、如果存在多个目标对象，就需要多个ProxyFactoryBean创建代理对象，这使得配置文件臃肿，不便于管理
+     2、程序员希望调用的是目标对象，实际上调用的是代理对象，不符合常理。
+     
+     DefaultAdvisorAutoProxyCreator缺点：
+     1、不能指定目标对象
+     2、不能指定切面类型，切面只能是advisor
+     3、不能选择advisor，所有advisor均被织入目标方法中
+     -->
+
+</beans>
